@@ -1,4 +1,6 @@
 import pygame
+import colorama
+from colorama import Fore
 pygame.init()
 
 
@@ -154,7 +156,14 @@ def main():
             left_score += 1
             print("Left Scored! ( " + str(left_score) + " )")
             ball.reset()
-            
+        if right_score == 10:
+            while 1 == 1 :
+                print(Fore.RED + "Right has won!")
+                main()
+        if left_score == 10:
+            for i in range(10) :
+                print(Fore.BLUE + "Left has won!")
+                main()
     pygame.quit()
     
 if __name__ == '__main__':
