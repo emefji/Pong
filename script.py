@@ -3,7 +3,6 @@ import colorama
 from colorama import Fore
 pygame.init()
 
-
 WIDTH, HEIGHT = 700, 500
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Pong - by JAran")
@@ -97,6 +96,7 @@ def end(winner, WIN) :
     
     pygame.display.update()
     pygame.time.delay(3000)
+    pygame.quit()
 
 def handle_collision(ball,left_paddle, right_paddle):
     if ball.y  + ball.radius >= HEIGHT:
@@ -137,6 +137,16 @@ def handle_paddle_movement(keys, left_paddle, right_paddle) :
         right_paddle.move(up=True)
     if keys[pygame.K_DOWN] and right_paddle.y + right_paddle.VEL + right_paddle.height <= HEIGHT:
         right_paddle.move(up=False)
+
+def menu() :
+    x = 0
+    menu = {"Start", "Info", "Quit"}
+    for i in menu : 
+        x += 100
+        font = pygame.font.SysFont("proximanova", 50)
+        img = font.render(i, True, WHITE)
+        WIN.blit(img, (WIDTH / 2 - 60, 30 + x))
+    pygame.display.update()
 
 def main():
     run = True
@@ -183,7 +193,6 @@ def main():
                 winner = "Left"
                 end(winner, WIN)
                 run = False
-    '''pygame.quit()'''
     
 if __name__ == '__main__':
-    main()
+    menu()
