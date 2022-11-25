@@ -15,11 +15,13 @@ BLUE = (0,0,255)
 GREEN = (0,128,0)
 RED = (220,20,60)
 
+global keys
+
 
 PADDLE_WIDTH, PADDLE_HEIGHT = 20, 100
 BALL_RADIUS = 7
 
-SCORE_FONT = pygame.font.SysFont("proximanova", 50)
+SCORE_FONT = pygame.font.SysFont("nintendo", 50)
 
 class Ball:
     MAX_VEL = 5
@@ -139,16 +141,32 @@ def handle_paddle_movement(keys, left_paddle, right_paddle) :
         right_paddle.move(up=False)
 
 def menu() :
+    running = True
     x = 0
+    option = 1
     menu = {"Start", "Info", "Quit"}
-    for i in menu : 
-        x += 100
-        font = pygame.font.SysFont("proximanova", 50)
-        img = font.render(i, True, WHITE)
-        WIN.blit(img, (WIDTH / 2 - 60, 30 + x))
-    pygame.display.update()
-
+    while running:
+        for i in menu :
+            x += 150
+            
+            font = pygame.font.SysFont("nintendo", 50)
+            img = font.render(i, True, WHITE)
+            WIN.blit(img, (WIDTH / 2 - 60, -60 + x))
+            
+            font = pygame.font.SysFont("nintendo", 50)
+            img = font.render("> ", True, RED)
+            WIN.blit(img, (WIDTH / 2 - 100, -60 + x))
+            
+            if pygame.key.get_pressed()[pygame.K_RETURN]:
+                print("funkar")
+                main()
+        
+        pygame.display.update()
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
 def main():
+    
     run = True
     clock = pygame.time.Clock()
     
@@ -193,6 +211,7 @@ def main():
                 winner = "Left"
                 end(winner, WIN)
                 run = False
-    
+                
+                
 if __name__ == '__main__':
     menu()
